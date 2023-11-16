@@ -1,0 +1,75 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+package pb;
+option go_package = "/route/test";
+
+service TestService {
+    // 测试内容列表查询
+    rpc ListTests(ListTestsRequest) returns (ListTestsResponse) {
+        option (google.api.http) = {
+            get: "/v1alpha1",
+        };
+    }
+    // 测试内容2
+    rpc ListTest2(ListTestsRequest) returns (ListTestsResponse) {
+        option (google.api.http) = {
+            post: "/v2alpha1",
+        };
+    }
+    // 测试内容3
+    rpc ListTest3(ListTestsRequest) returns (ListTestsResponse) {
+        option (google.api.http) = {
+            post: "/v2alpha1/:id",
+        };
+    }
+}
+
+message ListTestsRequest {
+    string parent     = 1;
+    int32 page_size   = 2;
+    string page_token = 3;
+    repeated int32 test = 4;
+}
+
+message ListTestsResponse {
+    string id = 1;
+}
+
+
+message ListReq {
+    string parent     = 1;
+    int32 page_size   = 2;
+    string page_token = 3;
+    repeated int32 test = 4;
+}
+
+message ListResp {
+    string id = 1;
+}
+
+message List22Req {
+    string parent     = 1;
+    int32 page_size   = 2;
+    string page_token = 3;
+    repeated int32 test = 4;
+    ListReq other_req = 5;
+}
+
+message List22Resp {
+    message Data {
+        string msg = 1;
+        uint32 status = 2;
+    }
+    string id = 1;
+    Data data = 2;
+}
+
+message Node {
+    uint32 val = 1;
+    Node next =2;
+}
+
+message TestM {
+    map<string,string> data = 1;
+    string msg = 2;
+}
